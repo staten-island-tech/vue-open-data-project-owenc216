@@ -1,7 +1,6 @@
 <template>
   <div class="card">
-    <h2>{{ Sat.school_name }}</h2>
-    <h3>{{ id }}</h3>
+    <h1>Sat results from 2012</h1>
   </div>
 </template>
 
