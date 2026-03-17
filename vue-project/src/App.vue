@@ -1,6 +1,6 @@
 <template>
   <div>
-    <RouterLink to="/vue-lists"> Vue Lists </RouterLink>
+    <h1>sat result from 2012</h1>
   </div>
 </template>
 
