@@ -1,13 +1,14 @@
 <template>
-  <div class="card">
-    <h2>{{ Sat.school_name }}</h2>
+  <router-link :to="satPath" class="card">
+    <h2>{{ sat.name }}</h2>
     <h3>{{ id }}</h3>
-  </div>
+  </router-link>
 </template>
 
 <script setup>
+import { computed } from 'vue'
 const props = defineProps({
-  Sat: {
+  sat: {
     type: Object,
     required: true,
   },
@@ -15,6 +16,9 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+})
+const satPath = computed(() => {
+  return `/sat/${props.sat.school_name}`
 })
 </script>
 
@@ -36,3 +40,4 @@ img {
   object-fit: cover;
 }
 </style>
+//? no value yet dont show anything wait until something is ther
