@@ -1,24 +1,52 @@
 <template>
-  <div class="card">
-    <h2>{{ sat.school_name }}</h2>
-    <select v-model="selectedSat">
-      <option v-for="item in sat" :key="item.id" :value="item.id">{{ item.name }}</option>
+  <div class="container">
+    <h2>NYC Sat Results</h2>
+    <input v-model="searchSchool" placeholder="Type school name" />
+    <select v-model="selectedSchool">
+      <option value="">select a school</option>
+      <option v-for="(school, index) in sat" :key="index" :value="school.school_name">
+        {{ school.school_name }}
+      </option>
     </select>
+    <div class="cards">
+      <satCard v-for="(sat, index) in selectedList" :key="index" :sat="sat" />
+    </div>
   </div>
 </template>
 <script setup>
-import { onBeforeMount, ref } from 'vue'
-const sat = ref([])
+import { onMounted, ref, watch } from 'vue'
+const Sat = ref([])
+const searchSchool = ref('')
+const selectedSchool = ref('')
+const selectedList = ref([])
+const filteredOptions = ref([])
+
 async function getSat() {
   try {
     const response = await fetch('https://data.cityofnewyork.us/resource/f9bf-2cp4.json')
     const data = await response.json()
-    sat.value = data.results
+    Sat.value = data.results
+    filteredOptions.value = data.results
+    selectedList.value = data.results
   } catch (error) {
     console.log(error)
   }
 }
-onBeforeMount(() => {
+watch(searchSchool, function () {
+  filteredOptions.value = Sat.value.filter(function (school) {
+    return school.school_name.toLowerCase().includes(searchSchool.value.toLowerCase())
+  })
+})
+watch(selectedSchool, function () {
+  if (selectedSchool.value === '') {
+    selectedList.value = Sat.value
+  } else {
+    selectedList.value = Sat.value.filter(function (school) {
+      return school.school_name === selectedSchool.value
+    })
+  }
+})
+onMounted(() => {
   getSat()
 })
 </script>
