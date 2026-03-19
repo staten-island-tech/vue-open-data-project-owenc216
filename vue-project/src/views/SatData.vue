@@ -67,7 +67,7 @@ onMounted(() => {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  align-items: center;x
+  align-items: center;
   justify-content: space-around;
 }
 </style>
