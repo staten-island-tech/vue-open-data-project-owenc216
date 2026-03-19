@@ -33,22 +33,28 @@ async function getSat() {
     console.log(error)
   }
 }
-watch(searchSchool, () => {
-  filteredOptions.value = Sat.value.filter((school) =>
-    school.school_name.toLowerCase().includes(searchSchool.value.toLowerCase()),
-  )
-})
+watch(searchSchool, function () {
+  filteredOptions.value = []
 
-/*
-watch(selectedSchool, function () {
-  if (selectedSchool.value === '') {
-    selectedList.value = Sat.value
-  } else {
-    selectedList.value = Sat.value.filter(function (school) {
-      return school.school_name === selectedSchool.value
-    })
+  for (let i = 0; i < Sat.value.length; i++) {
+    let school = Sat.value[i]
+
+    if (school.school_name.toLowerCase().includes(searchSchool.value.toLowerCase())) {
+      filteredOptions.value.push(school)
+    }
   }
-}) */
+})
+watch(selectedSchool, function () {
+  selectedList.value = []
+
+  for (let i = 0; i < Sat.value.length; i++) {
+    let school = Sat.value[i]
+
+    if (school.school_name === selectedSchool.value) {
+      selectedList.value.push(school)
+    }
+  }
+})
 onMounted(() => {
   getSat()
 })
