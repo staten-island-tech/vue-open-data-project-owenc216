@@ -1,10 +1,12 @@
 <template>
-  <div>
-    <h1>sat result from 2012</h1>
-    <router-view></router-view>
-  </div>
+  <BarChart ref="bar" />
 </template>
 
-<script setup></script>
+<script>
+import BarChart from '@/components/BarChart.vue'
 
-<style lang="scss" scoped></style>
+export default {
+  name: 'App',
+  components: { BarChart },
+}
+</script>

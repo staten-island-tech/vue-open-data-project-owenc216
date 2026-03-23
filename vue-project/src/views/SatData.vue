@@ -14,6 +14,12 @@
   </div>
 </template>
 <script setup>
+import BarChart from '@/components/BarChart.vue'
+
+defineOptions({
+  name: 'App',
+  components: { BarChart },
+})
 import { onMounted, ref, watch } from 'vue'
 import SatCard from '@/components/SatCard.vue'
 const Sat = ref([])
