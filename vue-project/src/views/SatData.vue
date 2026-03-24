@@ -10,6 +10,7 @@
     </select>
     <div class="cards">
       <SatCard v-for="(sat, index) in selectedList" :key="index" :sat="sat" />
+      <BarChart v-for="(sat, index) in selectedList" :key="index" :sat="sat" />
     </div>
   </div>
 </template>
